@@ -199,28 +199,29 @@
 		{/each}
 
 		{#if quest.uid === localStorage.getItem('uuid')}
-			<div class="flex flex-row items-center justify-start gap-2 pt-2">
+			<!-- <div class="flex flex-row items-center justify-start gap-2 pt-2">
 				<input
 					type="checkbox"
 					class="toggle toggle-xs"
 					checked={quest.public ?? false}
 					on:click={async (e) => {
-						await handlePublicityChange(e, i);
+						alert('No');
+						// await handlePublicityChange(e, i);
 					}}
 				/>
 				<small>Set {quest.public ? 'Private' : 'Public'}</small>
-			</div>
+			</div> -->
 		{/if}
 		<div class="flex flex-row items-center justify-start gap-2 pt-2">
 			{#if quest.public}
-				<button
+				<!-- <button
 					class="btn btn-outline btn-xs w-fit self-end"
 					disabled={disableCloneButton}
 					on:click={async (e) => {
 						await handleClone(e, i);
 					}}
 					>{disableCloneButton ? 'Cloned' : 'Clone'}
-				</button>
+				</button> -->
 			{/if}
 			<small class="whitespace-nowrap border border-black px-1"
 				>{quest.public ? 'Public' : 'Private'}</small

@@ -9,7 +9,7 @@
 	let uuid: string;
 	let loadingQuests = false;
 	let hideOriginals = false;
-	let paused = true;
+	let paused = false;
 
 	const apiCall = async () => {
 		loadingQuests = true;
@@ -64,7 +64,7 @@
 		}
 	};
 
-	let justMine = false;
+	let justMine = true;
 
 	const GenerateUUID = async () => {
 		const baseUsername = 'user';
@@ -118,6 +118,7 @@
 					type="checkbox"
 					class="toggle toggle-xs"
 					bind:checked={justMine}
+					disabled
 					on:click={handleMineChange}
 				/>
 				<small class="whitespace-nowrap"> Just mine </small>

@@ -16,7 +16,7 @@ export async function PATCH({ request }) {
   const questId = updatedQuestData._id;
 
   const updatedQuest = await Quest.findByIdAndUpdate(questId, {
-    public: updatedQuestData.public
+    public: false
   }, { new: true });
 
   if (!updatedQuest) {
