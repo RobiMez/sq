@@ -106,7 +106,7 @@
 	class="container mx-auto flex h-full w-full max-w-4xl flex-grow flex-col items-center justify-start px-12"
 >
 	<div class="flex w-full flex-col gap-1 bg-stone-100 px-4">
-		<h1 class="py-6 text-5xl font-extralight text-stone-600">Welcome to Side Quests</h1>
+		<h1 class="py-6 lg:text-5xl font-extralight text-stone-600 text-3xl">Welcome to Side Quests</h1>
 		<div class="flex flex-row items-center justify-start gap-2 py-1">
 			<input
 				type="checkbox"
@@ -114,11 +114,11 @@
 				bind:checked={justMine}
 				on:click={handleMineChange}
 			/>
-			<small> Just mine </small>
+			<small class="whitespace-nowrap"> Just mine </small>
 			<input type="checkbox" class="toggle toggle-xs" bind:checked={hideCompleted} />
-			<small> Hide completed </small>
+			<small class="whitespace-nowrap"> Hide done </small>
 			<input type="checkbox" class="toggle toggle-xs" bind:checked={hideOriginals} />
-			<small> Hide originals </small>
+			<small class="whitespace-nowrap"> Hide originals </small>
 			{#if loadingQuests}
 				<small> Refreshing ... </small>
 			{/if}
@@ -161,14 +161,14 @@
 					{/if}
 				{:else if hideOriginals}
 					{#if !quest.cloners.find((c) => c === localStorage.getItem('uuid'))}
-					<Card
-						on:refreshPlz={async () => {
-							await apiCall();
-						}}
-						{quest}
-						{quests}
-						{i}
-					/>
+						<Card
+							on:refreshPlz={async () => {
+								await apiCall();
+							}}
+							{quest}
+							{quests}
+							{i}
+						/>
 					{/if}
 				{:else}
 					<Card

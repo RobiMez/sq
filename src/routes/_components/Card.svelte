@@ -222,9 +222,11 @@
 					>{disableCloneButton ? 'Cloned' : 'Clone'}
 				</button>
 			{/if}
-			<small class="border border-black px-1">{quest.public ? 'Public' : 'Private'}</small>
+			<small class="whitespace-nowrap border border-black px-1"
+				>{quest.public ? 'Public' : 'Private'}</small
+			>
 
-			<small class="text-xs font-light">
+			<small class="whitespace-nowrap text-xs font-light">
 				{quest.uid === 'PUBLIC'
 					? ' '
 					: quest.uid === localStorage.getItem('uuid')
@@ -232,10 +234,14 @@
 					: `By: ${quest.uid.slice(2, 6)}`}</small
 			>
 
-			<small>{quest.cloners.length} Cloner{quest.cloners.length == 1 ? '' : 's'} </small>
-			<div class="flex flex-row gap-2 overflow-clip">
+			<small class="whitespace-nowrap"
+				>{quest.cloners.length} Cloner{quest.cloners.length == 1 ? '' : 's'}
+			</small>
+			<div class="flex w-full flex-row gap-2 overflow-hidden">
 				{#each quest.cloners as cloner}
-					<small class="border border-black px-1">{cloner.slice(2, 6)}</small>
+					<small class="whitespace-nowrap border border-black px-1">
+						{cloner.slice(2, 6)}
+					</small>
 				{/each}
 			</div>
 		</div>
