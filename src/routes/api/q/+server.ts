@@ -102,7 +102,7 @@ export async function GET({ url }) {
     const uniqueQuests = [...publicQuests ?? [], ...myQuests ?? []];
 
 
-    quests = uniqueQuests.sort().toReversed();
+    quests = uniqueQuests.sort().reverse();
   }
   else {
     // Otherwise, fetch all quests
