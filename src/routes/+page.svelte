@@ -56,6 +56,8 @@
 			generatingQuest = false;
 			console.log(resp);
 			await apiCall();
+			quests = quests;
+
 			vagueQuest = '';
 			stagedQuest = resp.body;
 		}
@@ -106,7 +108,7 @@
 	class="container mx-auto flex h-full w-full max-w-4xl flex-grow flex-col items-center justify-start px-12"
 >
 	<div class="flex w-full flex-col gap-1 bg-stone-100 px-4">
-		<h1 class="py-6 lg:text-5xl font-extralight text-stone-600 text-3xl">Welcome to Side Quests</h1>
+		<h1 class="py-6 text-3xl font-extralight text-stone-600 lg:text-5xl">Welcome to Side Quests</h1>
 		<div class="flex flex-row items-center justify-start gap-2 py-1">
 			<input
 				type="checkbox"
@@ -145,11 +147,33 @@
 		</div>
 	</div>
 
-	<div class="flex w-full flex-col gap-8 pt-12">
-		{#each quests.reverse() as quest, i}
-			{#key hideCompleted}
-				{#if hideCompleted}
-					{#if quest.progress !== 100}
+	<div class="flex w-full flex-col gap-8 py-12">
+		{#key quests}
+			{#each quests as quest, i}
+				{#key hideCompleted}
+					{#if hideCompleted}
+						{#if quest.progress !== 100}
+							<Card
+								on:refreshPlz={async () => {
+									await apiCall();
+								}}
+								{quest}
+								{quests}
+								{i}
+							/>
+						{/if}
+					{:else if hideOriginals}
+						{#if !quest.cloners.find((c) => c === localStorage.getItem('uuid'))}
+							<Card
+								on:refreshPlz={async () => {
+									await apiCall();
+								}}
+								{quest}
+								{quests}
+								{i}
+							/>
+						{/if}
+					{:else}
 						<Card
 							on:refreshPlz={async () => {
 								await apiCall();
@@ -159,28 +183,8 @@
 							{i}
 						/>
 					{/if}
-				{:else if hideOriginals}
-					{#if !quest.cloners.find((c) => c === localStorage.getItem('uuid'))}
-						<Card
-							on:refreshPlz={async () => {
-								await apiCall();
-							}}
-							{quest}
-							{quests}
-							{i}
-						/>
-					{/if}
-				{:else}
-					<Card
-						on:refreshPlz={async () => {
-							await apiCall();
-						}}
-						{quest}
-						{quests}
-						{i}
-					/>
-				{/if}
-			{/key}
-		{/each}
+				{/key}
+			{/each}
+		{/key}
 	</div>
 </div>

@@ -99,9 +99,10 @@ export async function GET({ url }) {
     const myQuests = await Quest.find({ uid: uid }).exec();
 
     // Merge myQuests and publicQuests
-    const uniqueQuests = [...myQuests ?? [], ...publicQuests ?? []];
+    const uniqueQuests = [...publicQuests ?? [], ...myQuests ?? []];
 
-    quests = uniqueQuests;
+
+    quests = uniqueQuests.sort().toReversed();
   }
   else {
     // Otherwise, fetch all quests
